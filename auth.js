@@ -1,78 +1,138 @@
-// ===========================================
-// Авторизация
-// ===========================================
+async function register() {
 
-async function registerUser(data) {
 
-    const { data: authData, error } =
-        await supabaseClient.auth.signUp({
+const firstName =
+document.getElementById("firstName").value;
 
-            email: data.email,
 
-            password: data.password
+const lastName =
+document.getElementById("lastName").value;
 
-        });
 
-    if (error) {
+const phone =
+document.getElementById("phone").value;
 
-        alert(error.message);
 
-        return null;
+const email =
+document.getElementById("email").value;
 
-    }
 
-    return authData;
-
-}
+const password =
+document.getElementById("password").value;
 
 
 
+if(
+!firstName ||
+!lastName ||
+!phone ||
+!email ||
+!password
+){
 
-async function loginUser(email, password) {
+alert("Заполните все поля");
 
-    const { data, error } =
-        await supabaseClient.auth.signInWithPassword({
-
-            email,
-
-            password
-
-        });
-
-    if (error) {
-
-        alert(error.message);
-
-        return null;
-
-    }
-
-    return data;
+return;
 
 }
 
 
 
 
-async function logoutUser() {
+const {data, error} =
+await supabaseClient.auth.signUp({
 
-    await supabaseClient.auth.signOut();
+email: email,
 
-    window.location.href = "../login.html";
+password: password
+
+});
+
+
+
+if(error){
+
+alert(error.message);
+
+return;
 
 }
 
 
 
 
-async function getCurrentUser() {
 
-    const {
+const user = data.user;
 
-        data
 
-    } = await supabaseClient.auth.getUser();
 
-    return data.user;
+const {error: profileError} =
+await supabaseClient
+.from("profiles")
+.insert({
+
+id: user.id,
+
+first_name: firstName,
+
+last_name: lastName,
+
+phone: phone,
+
+email: email,
+
+role: "client"
+
+});
+
+
+
+
+
+if(profileError){
+
+alert(profileError.message);
+
+return;
+
+}
+
+
+
+
+
+const {error: clientError} =
+await supabaseClient
+.from("client_profiles")
+.insert({
+
+user_id:user.id
+
+});
+
+
+
+
+
+if(clientError){
+
+alert(clientError.message);
+
+return;
+
+}
+
+
+
+
+
+alert(
+"Регистрация успешна! Проверьте почту."
+);
+
+
+
+window.location.href="login.html";
+
 
 }

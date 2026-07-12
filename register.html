@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Регистрация — Дракон Востока</title>
+<title>Регистрация — Дзен</title>
 
 <link rel="stylesheet" href="css/style.css">
 
@@ -20,13 +20,13 @@
 
 
 
-
-
 <main class="section">
 
 
 <div class="container">
 
+
+<div class="card auth-card">
 
 
 <h1 class="page-title">
@@ -36,96 +36,40 @@
 
 
 
-<div class="card form-card">
-
-
-
-<form>
-
-
-
-<label>
-Имя
-</label>
-
-
-<input 
+<input id="firstName"
 type="text"
-placeholder="Введите имя">
+placeholder="Имя">
 
 
 
-
-
-<label>
-Фамилия
-</label>
-
-
-<input 
+<input id="lastName"
 type="text"
-placeholder="Введите фамилию">
+placeholder="Фамилия">
 
 
 
-
-
-<label>
-Дата рождения
-</label>
-
-
-<input 
-type="date">
-
-
-
-
-
-<label>
-Email
-</label>
-
-
-<input 
-type="email"
-placeholder="example@mail.com">
-
-
-
-
-
-<label>
-Телефон
-</label>
-
-
-<input 
+<input id="phone"
 type="tel"
-id="phone"
-placeholder="+7 (900) 000-00-00"
-maxlength="16">
+placeholder="Телефон">
 
 
 
+<input id="email"
+type="email"
+placeholder="Email">
 
 
-<label>
-Пароль
-</label>
 
-
-<input 
+<input id="password"
 type="password"
-placeholder="Введите пароль">
+placeholder="Пароль">
 
 
 
 
 
-<button 
-class="btn"
-type="submit">
+<button class="btn"
+onclick="register()">
 
 Создать аккаунт
 
@@ -134,14 +78,8 @@ type="submit">
 
 
 
-</form>
 
-
-
-
-
-
-<p style="margin-top:20px; text-align:center;">
+<p style="margin-top:20px;">
 
 Уже есть аккаунт?
 
@@ -149,14 +87,11 @@ type="submit">
 Войти
 </a>
 
-
 </p>
 
 
 
-
 </div>
-
 
 
 </div>
@@ -167,13 +102,17 @@ type="submit">
 
 
 
-
-
 <div id="footer"></div>
 
 
 
 
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="js/supabase.js"></script>
+
+<script src="js/auth.js"></script>
 
 <script src="js/components.js"></script>
 
